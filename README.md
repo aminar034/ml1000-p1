@@ -11,3 +11,8 @@ optional arguments:
   -p PORT, --port PORT  Port to listen on for HTTP requests.
   -v, --verbose         Display additional information about execution.
 ```
+
+
+## References
+
+* [pycaret](https://pycaret.gitbook.io/docs/)
