@@ -2,17 +2,21 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
+import os
 import sys
 import argparse
 import logging
+from datetime import datetime
 #
 from flask import Flask, request, url_for, redirect, render_template, jsonify
 #
+from model import HotelReservationDataset
+#
 OPT_VERBOSE_HELP = "Display additional information about execution."
-
+#
 logger = logging.getLogger(__name__)
 app = Flask(__name__)
-
+#
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -23,6 +27,10 @@ def main(argv):
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="",
         epilog="")
+    parser.add_argument('-t', '--train',
+                    dest="do_train",
+                    action="store_true",
+                    help="Train a new model without starting the web server.")
     parser.add_argument('-p', '--port',
                     dest="port",
                     default=5000,
@@ -39,8 +47,28 @@ def main(argv):
     args = parser.parse_args(args=argv[1:])
     print("")
 
-    # Start the server
-    app.run(port=int(args.port), debug=bool(args.is_debug), threaded=True)
+    # Train a new model
+    if args.do_train:
+        # Load the data
+        datafile = os.path.abspath('./data/data.csv')
+        dataset = HotelReservationDataset(_file=datafile, _target_col="booking_status")
+        logger.info(f"{dataset.nb_rows} row(s) loaded from '{datafile}'.")
+        # Generate the model
+        logger.info("Selecting best classifier model...")
+        model = dataset.best_model
+        # Print information about the best model
+        print(model.summary())
+        # Generate a file name based on the current date and time
+        now = datetime.now().strftime("%Y%m%d-%H%M%S")
+        file_name = f"{now}"
+        file_path = os.path.abspath(os.path.join(".", "models", file_name))
+        # Save the best model to a file
+        save_model(best_model, file_path)
+        logger.info(f"Save model to '{file_path}.")
+    # Otherwise, start the server
+    else:
+        # Start the server
+        app.run(port=int(args.port), debug=bool(args.is_debug), threaded=True)
 
 def entry_point():
     """Zero-argument entry point for use with setuptools/distribute."""
