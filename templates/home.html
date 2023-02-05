@@ -13,7 +13,7 @@
 	<div id="form_container">
 	
 		<h1><a>Hotel Reservation Form</a></h1>
-		<form id="form_45045" class="appnitro"  method="post" action="">
+		<form id="form_45045" class="appnitro"  method="post" action="/process">
 					<div class="form_description">
 			<h2>Hotel Reservation Form</h2>
 			<p>Provide details about your stay.</p>
@@ -23,25 +23,25 @@
 					<li id="li_1" >
 		<label class="description" for="element_1">No. of Adults </label>
 		<div>
-			<input id="element_1" name="element_1" class="element text small" type="text" maxlength="255" value=""/> 
+			<input id="element_1" name="no_of_adults" class="element text small" type="text" maxlength="255" value=""/> 
 		</div><p class="guidelines" id="guide_1"><small>Number of adults</small></p> 
 		</li>		<li id="li_2" >
 		<label class="description" for="element_2">No. of Children </label>
 		<div>
-			<input id="element_2" name="element_2" class="element text small" type="text" maxlength="255" value=""/> 
+			<input id="element_2" name="no_of_children" class="element text small" type="text" maxlength="255" value=""/> 
 		</div><p class="guidelines" id="guide_2"><small>Number of children</small></p> 
 		</li>		<li id="li_3" >
 		<label class="description" for="element_3">Check-In </label>
 		<span>
-			<input id="element_3_1" name="element_3_1" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_3_1" name="check_in_day" class="element text" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_3_1">DD</label>
 		</span>
 		<span>
-			<input id="element_3_2" name="element_3_2" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_3_2" name="check_in_month" class="element text" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_3_2">MM</label>
 		</span>
 		<span>
-	 		<input id="element_3_3" name="element_3_3" class="element text" size="4" maxlength="4" value="" type="text">
+	 		<input id="element_3_3" name="check_in_year" class="element text" size="4" maxlength="4" value="" type="text">
 			<label for="element_3_3">YYYY</label>
 		</span>
 	
@@ -62,15 +62,15 @@
 		</li>		<li id="li_4" >
 		<label class="description" for="element_4">Check-Out </label>
 		<span>
-			<input id="element_4_1" name="element_4_1" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_4_1" name="check_out_day" class="element text" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_4_1">DD</label>
 		</span>
 		<span>
-			<input id="element_4_2" name="element_4_2" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_4_2" name="check_out_month" class="element text" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_4_2">MM</label>
 		</span>
 		<span>
-	 		<input id="element_4_3" name="element_4_3" class="element text" size="4" maxlength="4" value="" type="text">
+	 		<input id="element_4_3" name="check_out_year" class="element text" size="4" maxlength="4" value="" type="text">
 			<label for="element_4_3">YYYY</label>
 		</span>
 	
@@ -91,31 +91,28 @@
 		</li>		<li id="li_10" >
 		<label class="description" for="element_10">Meal Plan </label>
 		<div>
-		<select class="element select medium" id="element_10" name="element_10"> 
-			<option value="" selected="selected"></option>
-<option value="1" >None</option>
-<option value="2" >Meal Plan 1</option>
-<option value="3" >Meal Plan 2</option>
-
+		<select class="element select medium" id="element_10" name="type_of_meal_plan"> 
+			<option value="0" selected="selected">None</option>
+			<option value="1" >Meal Plan 1</option>
+			<option value="2" >Meal Plan 2</option>
 		</select>
 		</div> 
 		</li>		<li id="li_11" >
-		<label class="description" for="element_11">Do you require parking? </label>
-		<span>
-			<input id="element_11_1" name="element_11_1" class="element checkbox" type="checkbox" value="1" />
-<label class="choice" for="element_11_1">Yes</label>
-
-		</span> 
+		<label class="description" for="required_car_parking_space">Do you require parking? </label>
+		<div>
+			<select class="element select medium" id="element_10" name="required_car_parking_space"> 
+				<option value="0" selected="selected">Yes</option>
+				<option value="1" >No</option>
+			</select>
+		</div> 
 		</li>		<li id="li_12" >
 		<label class="description" for="element_12">Room Type </label>
 		<div>
-		<select class="element select medium" id="element_12" name="element_12"> 
-			<option value="" selected="selected"></option>
-<option value="1" >Room 1</option>
-<option value="2" >Room 2</option>
-<option value="3" >Room 3</option>
-<option value="4" >Room 4</option>
-
+		<select class="element select medium" id="element_12" name="room_type_reserved"> 
+			<option value="1" selected="selected">Room 1</option>
+			<option value="2" >Room 2</option>
+			<option value="3" >Room 3</option>
+			<option value="4" >Room 4</option>
 		</select>
 		</div> 
 		</li>		<li class="section_break">
@@ -124,55 +121,48 @@
 		</li>		<li id="li_13" >
 		<label class="description" for="element_13">Reservation Method </label>
 		<div>
-		<select class="element select medium" id="element_13" name="element_13"> 
-			<option value="" selected="selected"></option>
-<option value="1" >Online</option>
-<option value="2" >Offline</option>
-
+		<select class="element select medium" id="element_13" name="market_segment_type"> 
+			<option value="1" selected="selected">Online</option>
+			<option value="2" >Offline</option>
 		</select>
 		</div> 
 		</li>		<li id="li_14" >
-		<label class="description" for="element_14">Repeated Customer? </label>
-		<span>
-			<input id="element_14_1" name="element_14_1" class="element checkbox" type="checkbox" value="1" />
-<label class="choice" for="element_14_1">Yes</label>
-
-		</span> 
+		<label class="description" for="repeated_guest">Repeated Customer? </label>
+		<div>
+			<select class="element select medium" id="element_10" name="repeated_guest"> 
+				<option value="0" selected="selected">Yes</option>
+				<option value="1" >No</option>
+			</select>
+		</div> 
 		</li>		<li id="li_6" >
 		<label class="description" for="element_6">Previous Cancellations </label>
 		<div>
-			<input id="element_6" name="element_6" class="element text small" type="text" maxlength="255" value=""/> 
+			<input id="element_6" name="no_of_previous_cancellations" class="element text small" type="text" maxlength="255" value="0"/> 
 		</div> 
 		</li>		<li id="li_7" >
 		<label class="description" for="element_7">Previous Reservations </label>
 		<div>
-			<input id="element_7" name="element_7" class="element text small" type="text" maxlength="255" value=""/> 
+			<input id="element_7" name="no_of_previous_bookings_not_canceled" class="element text small" type="text" maxlength="255" value="0"/> 
 		</div> 
 		</li>		<li id="li_8" >
 		<label class="description" for="element_8">Average Room Price </label>
 		<span class="symbol">&#8364;</span>
 		<span>
-			<input id="element_8_1" name="element_8_1" class="element text currency" size="10" value="" type="text" /> .		
+			<input id="element_8_1" name="avg_price_per_room" class="element text currency" size="10" value="450.00" type="text" /> .		
 			<label for="element_8_1">Euros</label>
-		</span>
-		<span>
-			<input id="element_8_2" name="element_8_2" class="element text" size="2" maxlength="2" value="" type="text" />
-			<label for="element_8_2">Cents</label>
 		</span>
 		 
 		</li>		<li id="li_9" >
 		<label class="description" for="element_9">Number of Special Requests </label>
 		<div>
-			<input id="element_9" name="element_9" class="element text small" type="text" maxlength="255" value=""/> 
+			<input id="element_9" name="no_of_special_requests" class="element text small" type="text" maxlength="255" value="0"/> 
 		</div> 
 		</li>		<li id="li_15" >
 		<label class="description" for="element_15">Booking Status </label>
 		<div>
-		<select class="element select medium" id="element_15" name="element_15"> 
-			<option value="" selected="selected"></option>
-<option value="1" >Cancelled</option>
-<option value="2" >Not Cancelled</option>
-
+		<select class="element select medium" id="element_15" name="booking_status"> 
+			<option value="0" selected="selected">Cancelled</option>
+			<option value="1" >Not Cancelled</option>
 		</select>
 		</div> 
 		</li>
